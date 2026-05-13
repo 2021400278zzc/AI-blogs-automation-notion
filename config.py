@@ -88,8 +88,8 @@ NOTION_TOKEN = _get_env("NOTION_TOKEN", "", required=True)
 NOTION_DATABASE_ID = _get_env("NOTION_DATABASE_ID", "", required=True)
 
 # ============ 图床配置 ============
-IMAGE_UPLOAD_URL = _get_env("IMAGE_UPLOAD_URL", "https://tc.741568.xyz/upload")
-IMAGE_AUTH_CODE = _get_env("IMAGE_AUTH_CODE", "1024")
+IMAGE_UPLOAD_URL = _get_env("IMAGE_UPLOAD_URL", "", required=True)
+IMAGE_AUTH_CODE = _get_env("IMAGE_AUTH_CODE", "", required=True)
 IMAGE_UPLOAD_PARAMS = {
     "authCode": IMAGE_AUTH_CODE,
     "serverCompress": "true",
@@ -137,6 +137,10 @@ def validate_config():
         missing.append("NOTION_TOKEN")
     if not NOTION_DATABASE_ID:
         missing.append("NOTION_DATABASE_ID")
+    if not IMAGE_UPLOAD_URL:
+        missing.append("IMAGE_UPLOAD_URL")
+    if not IMAGE_AUTH_CODE:
+        missing.append("IMAGE_AUTH_CODE")
 
     if missing:
         raise ValueError(
@@ -162,7 +166,8 @@ def print_config_info():
     print(f"Image Model: {IMAGE_MODEL if IMAGE_PROVIDER == 'openai' else IMAGE_PROVIDER}")
     print(f"Notion Token: {'*' * 10 if NOTION_TOKEN else '未设置'}")
     print(f"Notion Database ID: {NOTION_DATABASE_ID[:10] + '...' if NOTION_DATABASE_ID else '未设置'}")
-    print(f"Image Upload URL: {IMAGE_UPLOAD_URL}")
+    print(f"Image Upload URL: {'*' * 10 if IMAGE_UPLOAD_URL else '未设置'}")
+    print(f"Image Auth Code: {'*' * 10 if IMAGE_AUTH_CODE else '未设置'}")
     print(f"Temp Dir: {TEMP_DIR}")
     print(f"Images Dir: {IMAGES_DIR}")
     print("=" * 50)
