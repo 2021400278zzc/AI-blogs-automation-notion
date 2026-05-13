@@ -57,8 +57,7 @@ export default function ArticlesPage() {
         </div>
       ) : (
         <>
-          {/* Desktop */}
-          <div className="card overflow-hidden hidden sm:block">
+          <div className="card card-glow overflow-hidden hidden sm:block">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border text-left text-[11px] font-semibold uppercase tracking-wider text-text-4">
@@ -81,7 +80,7 @@ export default function ArticlesPage() {
                         {a.cover_url ? (
                           <img src={a.cover_url} alt="" className="h-10 w-16 rounded-lg object-cover shadow-sm" />
                         ) : (
-                          <div className="flex h-10 w-16 items-center justify-center rounded-lg bg-surface-4">
+                          <div className="flex h-10 w-16 items-center justify-center rounded-lg bg-gradient-to-br from-surface-4 to-surface-3">
                             <FileText className="h-4 w-4 text-text-4" />
                           </div>
                         )}
@@ -131,18 +130,17 @@ export default function ArticlesPage() {
             </table>
           </div>
 
-          {/* Mobile */}
           <div className="space-y-3 sm:hidden">
             {articles.map(a => (
               <div
                 key={a.id}
                 onClick={() => navigate(`/article/${a.id}`)}
-                className="card card-hover flex items-center gap-3.5 p-4 cursor-pointer"
+                className="card card-hover card-glow flex items-center gap-3.5 p-4 cursor-pointer"
               >
                 {a.cover_url ? (
                   <img src={a.cover_url} alt="" className="h-11 w-[72px] rounded-lg object-cover shadow-sm" />
                 ) : (
-                  <div className="flex h-11 w-[72px] items-center justify-center rounded-lg bg-surface-4">
+                  <div className="flex h-11 w-[72px] items-center justify-center rounded-lg bg-gradient-to-br from-surface-4 to-surface-3">
                     <FileText className="h-4 w-4 text-text-4" />
                   </div>
                 )}

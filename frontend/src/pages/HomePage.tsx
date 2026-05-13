@@ -75,33 +75,33 @@ export default function HomePage() {
             icon={<FileText className="h-5 w-5" />}
             label="文章总数"
             value={stats.total_articles}
-            accent="from-brand/20 to-brand/5"
             iconColor="text-brand-light"
-            iconBg="bg-brand/10"
+            iconBg="bg-gradient-to-br from-brand/15 to-cyan/8"
+            gradient="from-brand/8 via-transparent to-cyan/5"
           />
           <StatCard
             icon={<Send className="h-5 w-5" />}
             label="已发布"
             value={stats.published}
-            accent="from-success/20 to-success/5"
             iconColor="text-success"
-            iconBg="bg-success/10"
+            iconBg="bg-gradient-to-br from-success/15 to-success/5"
+            gradient="from-success/8 via-transparent to-success/3"
           />
           <StatCard
             icon={<PenTool className="h-5 w-5" />}
             label="草稿"
             value={stats.drafts}
-            accent="from-warning/20 to-warning/5"
             iconColor="text-warning"
-            iconBg="bg-warning/10"
+            iconBg="bg-gradient-to-br from-warning/15 to-warning/5"
+            gradient="from-warning/8 via-transparent to-warning/3"
           />
           <StatCard
             icon={<TrendingUp className="h-5 w-5" />}
             label="总字数"
             value={stats.total_words > 1000 ? `${(stats.total_words / 1000).toFixed(1)}k` : stats.total_words}
-            accent="from-info/20 to-info/5"
             iconColor="text-info"
-            iconBg="bg-info/10"
+            iconBg="bg-gradient-to-br from-info/15 to-cyan/8"
+            gradient="from-info/8 via-transparent to-cyan/5"
           />
         </div>
       )}
@@ -112,19 +112,19 @@ export default function HomePage() {
           title="自动生成文章"
           desc="AI 自动选题、搜索、写作，一键生成完整博文并配图"
           onClick={() => navigate('/generate')}
-          gradient="from-brand to-brand-dark"
+          gradient="from-brand via-brand-dark to-cyan"
         />
         <QuickAction
           icon={<PenTool className="h-6 w-6" />}
           title="指定主题生成"
           desc="输入你想要的主题，AI 围绕主题撰写深度文章"
           onClick={() => navigate('/generate?mode=topic')}
-          gradient="from-info-2 to-brand"
+          gradient="from-cyan via-info-2 to-brand"
         />
       </div>
 
       {recent.length > 0 && (
-        <div className="card overflow-hidden">
+        <div className="card card-glow overflow-hidden">
           <div className="flex items-center justify-between border-b border-border px-6 py-4">
             <h3 className="text-[13px] font-semibold text-text-2">最近文章</h3>
             <button
@@ -144,7 +144,7 @@ export default function HomePage() {
                 {a.cover_url ? (
                   <img src={a.cover_url} alt="" className="h-11 w-[72px] flex-shrink-0 rounded-lg object-cover shadow-sm" />
                 ) : (
-                  <div className="flex h-11 w-[72px] flex-shrink-0 items-center justify-center rounded-lg bg-surface-4">
+                  <div className="flex h-11 w-[72px] flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-surface-4 to-surface-3">
                     <FileText className="h-4 w-4 text-text-4" />
                   </div>
                 )}
@@ -176,24 +176,27 @@ function StatCard({
   icon,
   label,
   value,
-  accent,
   iconColor,
   iconBg,
+  gradient,
 }: {
   icon: React.ReactNode
   label: string
   value: number | string
-  accent: string
   iconColor: string
   iconBg: string
+  gradient: string
 }) {
   return (
-    <div className="card card-hover p-5">
-      <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${iconBg} ${iconColor}`}>
-        {icon}
+    <div className="card card-hover card-glow p-5 relative overflow-hidden">
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 transition-opacity duration-300 group-hover:opacity-100`} />
+      <div className="relative z-10">
+        <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${iconBg} ${iconColor}`}>
+          {icon}
+        </div>
+        <p className="text-3xl font-bold tracking-tight text-text">{value}</p>
+        <p className="mt-1 text-xs text-text-4">{label}</p>
       </div>
-      <p className="text-3xl font-bold tracking-tight text-text">{value}</p>
-      <p className="mt-1 text-xs text-text-4">{label}</p>
     </div>
   )
 }
@@ -214,14 +217,17 @@ function QuickAction({
   return (
     <button
       onClick={onClick}
-      className="group card card-hover flex items-start gap-5 p-6 text-left"
+      className="group card card-hover card-glow flex items-start gap-5 p-6 text-left relative overflow-hidden"
     >
-      <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg shadow-brand-glow transition-transform duration-200 group-hover:scale-105`}>
-        {icon}
-      </div>
-      <div>
-        <p className="text-[15px] font-semibold text-text">{title}</p>
-        <p className="mt-1.5 text-xs leading-relaxed text-text-3">{desc}</p>
+      <div className="absolute -inset-1 bg-gradient-to-br from-brand/5 via-transparent to-cyan/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="relative z-10 flex items-start gap-5 w-full">
+        <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg shadow-brand-glow transition-transform duration-300 group-hover:scale-110`}>
+          {icon}
+        </div>
+        <div>
+          <p className="text-[15px] font-semibold text-text">{title}</p>
+          <p className="mt-1.5 text-xs leading-relaxed text-text-3">{desc}</p>
+        </div>
       </div>
     </button>
   )

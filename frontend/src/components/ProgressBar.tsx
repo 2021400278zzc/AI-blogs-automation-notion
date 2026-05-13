@@ -12,9 +12,11 @@ export default function ProgressBar({ current, label }: Props) {
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-surface-4">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-brand via-brand-light to-brand transition-all duration-700 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-brand via-brand-light to-cyan transition-all duration-700 ease-out relative"
           style={{ width: `${current}%` }}
-        />
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+        </div>
       </div>
     </div>
   )

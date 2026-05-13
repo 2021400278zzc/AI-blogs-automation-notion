@@ -99,15 +99,16 @@ export default function SettingsPage() {
         </div>
       )}
 
-      <div className="flex gap-1.5 rounded-xl border border-border bg-surface-2 p-1.5">
+      <div className="flex gap-1.5 rounded-xl border border-border bg-surface-2 p-1.5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-brand/3 via-transparent to-cyan/3" />
         {tabs.map(tab => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-[12px] font-semibold transition-all duration-200 ${
+            className={`relative z-10 flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-[12px] font-semibold transition-all duration-200 ${
               activeTab === tab.key
-                ? 'bg-brand/12 text-brand-light shadow-sm shadow-brand-glow'
-                : 'text-text-4 hover:text-text-2'
+                ? 'bg-gradient-to-r from-brand/12 to-cyan/8 text-brand-light shadow-sm shadow-brand-glow border border-brand/10'
+                : 'text-text-4 hover:text-text-2 border border-transparent'
             }`}
           >
             <tab.icon className="h-3.5 w-3.5" />
@@ -117,7 +118,7 @@ export default function SettingsPage() {
       </div>
 
       {activeTab === 'llm' && (
-        <div className="card p-6 space-y-5">
+        <div className="card card-glow p-6 space-y-5">
           <FormField
             label="LLM 提供商"
             value={form.llm_provider || ''}
@@ -128,7 +129,7 @@ export default function SettingsPage() {
               { value: 'claude', label: 'Anthropic Claude' },
             ]}
           />
-          <p className="text-xs text-text-4 rounded-lg bg-surface-3 p-3 border border-border">
+          <p className="text-xs text-text-4 rounded-lg bg-gradient-to-r from-surface-3 to-surface-3/50 p-3 border border-border">
             OpenAI 格式适用于：OpenAI、DeepSeek、Groq、Grok2API、Ollama 等
           </p>
 
@@ -145,9 +146,9 @@ export default function SettingsPage() {
             </>
           ) : (
             <>
-              <FormField label="Claude API 地址" value={form.claude_api_url || ''} onChange={v => handleChange('claude_api_url', v)} />
-              <FormField label="Claude API Key" value={form.claude_api_key || ''} onChange={v => handleChange('claude_api_key', v)} type="password" />
-              <FormField label="Claude 模型" value={form.claude_model || ''} onChange={v => handleChange('claude_model', v)} />
+              <FormField label="API 地址" value={form.claude_api_url || ''} onChange={v => handleChange('claude_api_url', v)} />
+              <FormField label="API Key" value={form.claude_api_key || ''} onChange={v => handleChange('claude_api_key', v)} type="password" />
+              <FormField label="模型" value={form.claude_model || ''} onChange={v => handleChange('claude_model', v)} />
               <div className="grid gap-4 sm:grid-cols-2">
                 <FormField label="Max Tokens" value={form.claude_max_tokens || ''} onChange={v => handleChange('claude_max_tokens', v)} type="number" />
                 <FormField label="Temperature" value={form.claude_temperature || ''} onChange={v => handleChange('claude_temperature', v)} type="number" />
@@ -158,7 +159,7 @@ export default function SettingsPage() {
       )}
 
       {activeTab === 'image' && (
-        <div className="card p-6 space-y-5">
+        <div className="card card-glow p-6 space-y-5">
           <FormField
             label="图片生成提供商"
             value={form.image_provider || ''}
@@ -205,7 +206,7 @@ export default function SettingsPage() {
           )}
 
           {form.image_provider === 'pollinations' && (
-            <div className="rounded-xl border border-info/15 bg-info/5 p-4">
+            <div className="rounded-xl border border-info/15 bg-gradient-to-r from-info/5 to-cyan/5 p-4">
               <p className="text-xs text-info">
                 Pollinations.ai 是免费服务，无需 API Key，开箱即用。
               </p>
@@ -221,10 +222,10 @@ export default function SettingsPage() {
       )}
 
       {activeTab === 'notion' && (
-        <div className="card p-6 space-y-5">
+        <div className="card card-glow p-6 space-y-5">
           <FormField label="Notion Token" value={form.notion_token || ''} onChange={v => handleChange('notion_token', v)} type="password" />
           <FormField label="Database ID" value={form.notion_database_id || ''} onChange={v => handleChange('notion_database_id', v)} />
-          <div className="rounded-xl border border-info/15 bg-info/5 p-4 space-y-1.5">
+          <div className="rounded-xl border border-info/15 bg-gradient-to-r from-info/5 to-brand/5 p-4 space-y-1.5">
             <p className="text-xs text-info">
               获取 Token：前往 notion.so/my-integrations 创建 Integration
             </p>
@@ -236,7 +237,7 @@ export default function SettingsPage() {
       )}
 
       {activeTab === 'article' && (
-        <div className="card p-6 space-y-5">
+        <div className="card card-glow p-6 space-y-5">
           <FormField label="文章最小字数" value={form.article_min_length || ''} onChange={v => handleChange('article_min_length', v)} type="number" />
           <div>
             <label className="mb-2 block text-[13px] font-medium text-text-2">封面图片风格描述</label>
@@ -251,7 +252,7 @@ export default function SettingsPage() {
         </div>
       )}
 
-      <div className="rounded-xl border border-border bg-surface-2 p-5">
+      <div className="rounded-xl border border-border bg-gradient-to-r from-surface-2 to-surface-2/50 p-5">
         <p className="text-xs leading-relaxed text-text-4">
           前端修改的配置会保存到 .env 文件，并立即生效（服务单例会自动重新初始化）。
           开发者也可以直接编辑 .env 文件，后端默认读取 .env 配置。

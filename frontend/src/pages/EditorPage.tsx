@@ -94,7 +94,7 @@ export default function EditorPage() {
         </div>
       </div>
 
-      <div className="card p-6 space-y-5">
+      <div className="card card-glow p-6 space-y-5">
         <div>
           <label className="mb-2 block text-[13px] font-medium text-text-2">标题</label>
           <input type="text" value={title} onChange={e => setTitle(e.target.value)} className="input-field text-base font-semibold" />
@@ -128,7 +128,7 @@ export default function EditorPage() {
         </div>
       </div>
 
-      <div className="card p-6">
+      <div className="card card-glow p-6">
         <div className="mb-3 flex items-center justify-between">
           <label className="text-[13px] font-medium text-text-2">文章内容</label>
           <span className="text-xs font-mono text-text-4 tabular-nums">{content.length} 字</span>

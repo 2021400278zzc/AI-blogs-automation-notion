@@ -133,7 +133,7 @@ export default function PreviewPage() {
         </div>
       )}
 
-      <div className="card overflow-hidden">
+      <div className="card card-glow overflow-hidden">
         <div className="flex items-center justify-between border-b border-border px-6 py-3">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-text-4">封面图片</span>
           <button
@@ -175,7 +175,7 @@ export default function PreviewPage() {
         <div className="flex items-center gap-2 flex-wrap">
           <Tag className="h-3.5 w-3.5 text-text-4" />
           {article.tags.map((tag, i) => (
-            <span key={i} className="rounded-full bg-brand/8 border border-brand/15 px-3 py-1 text-[11px] font-medium text-brand-light">
+            <span key={i} className="rounded-full bg-gradient-to-r from-brand/8 to-cyan/6 border border-brand/15 px-3 py-1 text-[11px] font-medium text-brand-light">
               {tag}
             </span>
           ))}
@@ -183,13 +183,13 @@ export default function PreviewPage() {
       )}
 
       {article.summary && (
-        <div className="card p-6">
+        <div className="card card-glow p-6">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-text-4 mb-2">摘要</p>
           <p className="text-sm leading-relaxed text-text-2">{article.summary}</p>
         </div>
       )}
 
-      <div className="card p-8">
+      <div className="card card-glow p-8">
         <div className="markdown-body">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {article.content_markdown || ''}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Sparkles, Loader2, Zap, PenTool, Info } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
@@ -45,7 +45,7 @@ export default function GeneratePage() {
     <div className="mx-auto max-w-2xl space-y-7">
       <PageHeader title="生成文章" subtitle="AI 自动选题或指定主题生成博文" />
 
-      <div className="card p-7">
+      <div className="card card-glow p-7">
         {!isRunning ? (
           <div className="space-y-6">
             <div>
@@ -83,7 +83,7 @@ export default function GeneratePage() {
         ) : (
           <div className="space-y-5 py-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand/10">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand/15 to-cyan/10">
                 <Loader2 className="h-5 w-5 animate-spin text-brand-light" />
               </div>
               <div>
@@ -114,10 +114,10 @@ export default function GeneratePage() {
         )}
       </div>
 
-      <div className="card p-6">
+      <div className="card card-glow p-6">
         <div className="mb-4 flex items-center gap-2.5">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-surface-4">
-            <Info className="h-3.5 w-3.5 text-text-3" />
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand/10 to-cyan/8">
+            <Info className="h-3.5 w-3.5 text-brand-light" />
           </div>
           <h3 className="text-[13px] font-semibold text-text-2">生成流程说明</h3>
         </div>
@@ -130,7 +130,7 @@ export default function GeneratePage() {
             '生成完成后可预览、编辑、再发布到 Notion',
           ].map((step, i) => (
             <div key={i} className="flex items-center gap-3.5">
-              <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg bg-brand/8 text-[11px] font-bold text-brand-light">
+              <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand/10 to-cyan/6 text-[11px] font-bold text-brand-light">
                 {i + 1}
               </span>
               <span className="text-xs text-text-3">{step}</span>
