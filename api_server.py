@@ -99,10 +99,10 @@ def _get_config_dict():
             "token": _mask(cfg.NOTION_TOKEN),
             "database_id": cfg.NOTION_DATABASE_ID,
         },
-        "upload": {
-            "url": cfg.IMAGE_UPLOAD_URL,
-            "auth_code": cfg.IMAGE_AUTH_CODE,
-        },
+"upload": {
+        "url": _mask(cfg.IMAGE_UPLOAD_URL),
+        "auth_code": _mask(cfg.IMAGE_AUTH_CODE),
+    },
         "article": {
             "min_length": cfg.ARTICLE_MIN_LENGTH,
             "cover_image_style": cfg.COVER_IMAGE_STYLE,
@@ -426,10 +426,12 @@ def update_config(req: ConfigUpdateRequest):
             "image_model": "IMAGE_MODEL",
             "image_size": "IMAGE_SIZE",
             "image_quality": "IMAGE_QUALITY",
-            "notion_token": "NOTION_TOKEN",
-            "notion_database_id": "NOTION_DATABASE_ID",
-            "cover_image_style": "COVER_IMAGE_STYLE",
-            "article_min_length": "ARTICLE_MIN_LENGTH",
+"notion_token": "NOTION_TOKEN",
+        "notion_database_id": "NOTION_DATABASE_ID",
+        "image_upload_url": "IMAGE_UPLOAD_URL",
+        "image_auth_code": "IMAGE_AUTH_CODE",
+        "cover_image_style": "COVER_IMAGE_STYLE",
+        "article_min_length": "ARTICLE_MIN_LENGTH",
         }
 
         for field_name, env_key in mapping.items():
